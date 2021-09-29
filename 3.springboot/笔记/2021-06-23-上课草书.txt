@@ -1,0 +1,102 @@
+1.springboot集成thymeleaf
+
+	1).引入依赖
+		<!--使用thymelaf-->
+		<dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+	2).配置thymeleaf模板配置
+		spring:
+		  thymeleaf:
+		    cache: false  # 关闭缓存
+		    prefix: classpath:/templates/ #指定模板位置
+		    suffix: .html #指定后缀
+
+
+	3).开发controller跳转到thymeleaf模板
+		@Controller
+		@RequestMapping("hello")
+		public class HelloController {
+
+		    @RequestMapping("hello")
+		    public String hello(){
+		        System.out.println("hello ok");
+		        return "index";  // templates/index.html
+		    }
+		}
+=================================================================
+2.thymeleaf 语法使用
+	
+	1).html使用thymeleaf语法 必须导入thymeleaf的头才能使用相关语法
+		namespace: 命名空间  
+		<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+	2).在html中通过thymeleaf语法获取数据
+
+
+================================================================
+3.案例二开发流程
+	
+	需求分析: 分析这个项目含有哪些功能模块
+		用户模块:
+			注册
+			登录
+			验证码
+			安全退出
+			真是用户
+		员工模块:
+			添加员工+上传头像
+			展示员工列表+展示员工头像
+			删除员工信息+删除员工头像
+			更新员工信息+更新员工头像
+
+	库表设计(概要设计): 1.分析系统有哪些表  2.分析表与表关系  3.确定表中字段(显性字段 隐性字段(业务字段))
+
+		2张表 
+			1.用户表 user
+				id username realname password gender
+
+			2.员工表 employee
+				id name salary birthday  photo
+
+		创建一个库: ems-thymeleaf
+
+	详细设计:
+		省略
+
+	编码(环境搭建+业务代码开发)
+		1.创建一个springboot项目 项目名字: ems-thymeleaf
+		2.修改配置文件为 application.yml  pom.xml  2.5.0
+		3.修改端口 9999  项目名: ems-thymeleaf
+		4.springboot整合thymeleaf使用
+			a.引入依赖
+			b.配置文件中指定thymeleaf相关配置
+			c.编写控制器测试
+
+		5.springboot整合mybatis
+			a.引入依赖
+				mysql、druid、mybatis-springboot-stater
+
+			b.配置文件中 
+
+		6.导入项目页面
+			static  存放静态资源
+
+			templates 目录 存放模板文件
+
+
+
+	测试
+	上线部署
+	维护
+	发版
+======================================================================
+
+用户相关:
+	1.登录
+	2.注册
+	3.验证码
+		1.验证码工具类

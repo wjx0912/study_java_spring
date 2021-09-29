@@ -1,0 +1,160 @@
+1.文件下载
+
+	a.确定项目中哪些资源可以被下载  aa.txt 用户须知.doc  .....
+		
+
+	b.将可以被下载资源放入服务器指定位置 、文件上传服务器fastdfs(dfs 分布式文件存储系统 1000个节点 冗余备份 )
+								    、上传到OSS对象存储 七牛云。。。。
+		/home/download                 
+			aa.txt
+			用户须知.doc
+			.....
+		/Users/chenyn/Desktop/线上课/项目阶段/01springboot/codes/springboot_day6/download
+
+	c.项目中开发一个下载页面download.jsp
+		提供下载文件链接
+
+	d.开发下载控制器controller
+
+
+========================================================
+2. 拦截器 interceptor 
+	
+	filter 过滤器: 过滤可以拦截javaweb中请求,放行,中断  强大: 拦截一切资源 .jsp  html css img .....
+
+  1.定义: 拦截器类似于javaweb中filter 功能 
+         注意: 只能拦截器controller相关的请求  
+
+  2.作用: 将controller中共有代码放入到拦截器中执行,减少controller中代码冗余
+
+  3.拦截器特性:
+  		1).拦截器只能拦截controller相关请求
+  		2).拦截器可以中断请求轨迹
+  		3).请求之前如果该请求配置了拦截器,请求会先经过拦截器,拦截器放心之后执行请求的controller,
+  			controller执行完成之后会回到拦截器继续执行拦截器中的代码
+
+  4.拦截器开发
+
+  		a.类 implement HandlerInterceptor 接口 引入默认实现
+
+  			preHandler    预先处理方法:  最先执行方法   返回值布尔类型  true 放行请求  false 中断
+  				controller    中内容
+  			
+  			postHandler   过程中处理: controller返回之后回到postHandler这个方法执行,执行完成这个方法开始响应浏览器
+  			
+  			afterCompletion 最后完成: 当响应结束之后会执行拦截器中这个方法内容
+
+
+  		b.配置拦截器
+
+  		   springmvc配置方式:mvc:interceptors  springmvc.xml
+
+  		   springboot 提供了springmvc配置类:    WebMvcConfigurer 
+
+  		   类 implement WebMvcConfigurer{
+
+  		   		//覆盖配置拦截器方法
+  		   		1.使用哪个拦截器 2.拦截器拦截请求   3.排除那些请求  
+  		   }
+
+
+============================================================================
+springboot项目两种部署方式:
+
+	1.war 包部署
+
+		a.执行项目打包的方式为 "war"  默认创建springboot项目打包都是jar
+		  修改项目pom.xml:
+		  <packaging>war<packaging>
+
+		b.去除springboot项目内嵌tomcat依赖
+		   <!--tomcat解析jsp-->
+	        <dependency>
+	            <groupId>org.apache.tomcat.embed</groupId>
+	            <artifactId>tomcat-embed-jasper</artifactId>
+	            <!--provided当前idea环境可用,打包不参与打包-->
+	            <scope>provided</scope>
+	        </dependency>
+
+	        <!--去掉内嵌的tomcat依赖-->
+	        <dependency>
+	            <groupId>org.springframework.boot</groupId>
+	            <artifactId>spring-boot-starter-tomcat</artifactId>
+	            <scope>provided</scope>
+	        </dependency>
+
+
+	    c.在插件中配置入口类
+
+	    	//1.继承SpringBootServletInitializer
+			//2.覆盖configure方法
+			public class Application extends SpringBootServletInitializer{
+			    public static void main(String[] args) {
+			        SpringApplication.run(Application.class,args);
+			    }
+			    @Override
+			    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+			        return builder.sources(Application.class);
+			    }
+			}
+
+
+	2.jar包方式部署
+
+		a.<packaging>jar</packaging>  默认就是jar
+
+
+		b.在target目录中获取对应jar文件
+
+		c.启动jar包
+
+			java -jar 对应jar文件名字  nohup &
+
+		d.注意事项:
+			1.springboot项目在使用jsp模板时,jar包部署默认无法找到jsp页面?
+			如何解决:
+				<plugins>
+				  <!--版本必须为1.4.2版本-->
+				  <plugin>
+				    <groupId>org.springframework.boot</groupId>
+				    <artifactId>spring-boot-maven-plugin</artifactId>
+				    <version>1.4.2.RELEASE</version>
+				  </plugin>
+				</plugins>
+
+			2.指定jsp文件打包位置
+				<!--执行jsp文件打包位置-->
+		        <resources>
+		            <!-- 打包时将jsp文件拷贝到META-INF目录下-->
+		            <resource>
+		                <!-- 指定resources插件处理哪个目录下的资源文件 -->
+		                <directory>src/main/webapp</directory>
+		                <!--指定必须要放在此目录下才能被访问到-->
+		                <targetPath>META-INF/resources</targetPath>
+		                <includes>
+		                    <include>**/**</include>
+		                </includes>
+		            </resource>
+		            <resource>
+		                <directory>src/main/resources</directory>
+		                <includes>
+		                    <include>**/**</include>
+		                </includes>
+		                <filtering>false</filtering>
+		            </resource>
+		        </resources>
+
+		e.重新打包测试
+
+
+
+
+
+
+
+
+
+
+
+
+

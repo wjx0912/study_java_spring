@@ -1,0 +1,167 @@
+1.开发方式演变
+  
+  a.传统方式开发 基于javaweb方式开发
+
+    项目业务代码  +  view  写在一个项目中
+
+
+    业务代码+view(jsp、thymeleaf、freemark)  
+
+
+
+  b.前后端分离开发   前后端分离   天下
+
+  	前端系统(Vue)   
+
+  	ajax  异步请求
+
+  	后端系统(java) 接口  controller ===> 传统web方式 /user/findById?id=21 =====> GET POST PUT DELETE GET /users users/001(RestFul API)
+
+
+2.springboot异常处理
+
+	异常处理: 
+		当出现异常改如何处理====>当controller中方法在执行过程中如果出现异常,我们应该如何处理异常这种方式 称之为异常处理
+
+
+	
+	a.传统方式开发异常处理
+	    @Component
+		public class GlobalExceptionResolver  implements HandlerExceptionResolver {
+
+
+		    //resolveExcpetion: 当控制器中任意一个方法出现异常时,如果该控制器的方法没有自己异常处理(try...catch),则会进入当前方法
+		    //注意:在异常处理这个方法中 完成自定义异常处理
+		    //参数1: request 当前请求对象
+		    //参数2: response 当前请求对应响应对象
+		    //参数3: 当前出现错误的方法对象
+		    //参数4: 出现异常的异常对象
+		    //返回值: modelAndview 模型和视图
+		    @Override
+		    public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
+		        System.out.println("这是全局异常处理....");
+		        System.out.println("当前异常为: "+ex);
+		        ModelAndView modelAndView = new ModelAndView();
+
+		        //针对不同异常类型跳转不同页面
+		        if(ex instanceof UserNameNotFoundException){
+		            modelAndView.setViewName("error");
+		            return modelAndView;
+		        }
+		        modelAndView.setViewName("500");
+		        return modelAndView;
+		    }
+		}
+
+
+
+	b.前后端分离开发异常处理
+
+		 ajax<------>controller
+		@ControllerAdvice
+		public class GlobalExceptionResolver {
+
+
+		    //处理指定异常
+		    @ExceptionHandler(value = IllegalNumberException.class)
+		    @ResponseBody
+		    public ResponseEntity<String> illegalNumberExceptionHandler(Exception ex) {
+		        System.out.println("进入非法参数异常处理");
+		        return new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		    }
+
+		    //处理exception子类异常
+		    @ExceptionHandler(value = Exception.class) //用在方法上  作用:用来处理指定异常  value属性: 用来指定处理异常类型
+		    @ResponseBody
+		    public ResponseEntity<String> exceptionHandler(Exception ex) {
+		        System.out.println("进入自定义异常处理");
+		        return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		    }
+		}
+========================================================================
+CORS
+	
+	1.什么是CORS
+		定义: 跨域资源共享
+
+	2.什么跨域资源共享
+
+		结束: 允许浏览器可以从当前源服务器通过ajax访问另外一个源服务地址
+
+	3.同源策略
+		是浏览器的一个安全功能，不同源的客户端脚本在没有明确授权的情况下，不能读写对方资源。 同源策略是浏览器安全的基石   ajax请求
+
+	4.什么是源 origin
+		源[origin]就是协议、域名和端口号。例如：http://www.baidu.com:80这个URL。
+		协议: http
+		域名: www.baidu.com
+		端口: 80
+
+		url: http://www.baidu.com:80
+		url: https://www.baidu.com:80 
+		url: http://www.baizhiedu.com:80
+		url: http://www.baidu.com:90
+
+		测试:
+			http://www.a.com/test/index.html
+
+			1.http://www.a.com/dir/page.html         	同源
+
+			2.http://www.child.a.com/test/index.html    不同源
+			3.https://www.a.com/test/index.html         不同源
+			4.http://www.a.com:8080/test/index.html     不同源
+
+	5.哪些操作不会受到同源限制
+		1.<script src="..."></script>，<img>，<link>，<iframe>
+
+	6.哪些操作会受到同源限制
+		ajax
+		出现跨域: Access-Control-Allow-Origin
+
+	7.springboot中如何解决跨域问题?
+
+		1.局部解决跨域
+			@CrossOrigin: 这个注解用在类上  代表解决类中所有方法运行允许其他域中资源访问
+
+		2.全局解决跨域
+
+			@Configuration
+			public class CorsConfig {
+
+			    @Bean
+			    public CorsFilter corsFilter() {
+			        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+			        CorsConfiguration corsConfiguration = new CorsConfiguration();
+			        corsConfiguration.addAllowedOrigin("*"); // 1允许任何域名使用
+			        corsConfiguration.addAllowedHeader("*"); // 2允许任何头
+			        corsConfiguration.addAllowedMethod("*"); // 3允许任何方法（post、get等）
+			        source.registerCorsConfiguration("/**", corsConfiguration);//4处理所有请求的跨域配置
+			        return new CorsFilter(source);
+			    }
+
+			}
+
+=========================================================================
+Jasypt 加密
+	1.原理
+		引入我以依赖
+
+	2.使用
+
+		1. 类 =====> root + 秘钥(暴露) =====>    加密之后结果 每一次运行都会生成一个新的加密结果    每个加密结果都是可用
+
+
+		2.加密之后结果 ====> 类.方法 秘钥 =====> root
+
+
+
+
+
+
+
+
+
+
+
+
+

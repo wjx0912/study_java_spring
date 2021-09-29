@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.GroupDao">
+
+    <resultMap type="com.baizhi.entity.Group" id="GroupMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="createdate" column="createDate" jdbcType="TIMESTAMP"/>
+        <result property="clazzId" column="clazzId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryAll" resultMap="GroupMap">
+        select id,
+               name,
+               createDate,
+               clazzId
+        from `group`
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into `group`(name, createDate, clazzId)
+        values (#{name}, #{createdate}, #{clazzId})
+    </insert>
+
+    <!--查询小组信息-->
+    <select id="queryById" resultMap="GroupMap">
+        select id,
+               name,
+               createDate,
+               clazzId
+        from `group`
+        where id = #{id}
+    </select>
+
+
+</mapper>
+

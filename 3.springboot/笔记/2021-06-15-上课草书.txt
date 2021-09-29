@@ -1,0 +1,114 @@
+
+
+springboot 微框架 = spring 工厂 + springmvc 控制器   微:快速开发框架  通过遵守默认约定  简化项目中样板化配置
+
+数据库访问框架:  hibernate  jpa  mybatis(框架)
+
+springboot框架中如何整合mybatis框架?
+
+1.引入依赖
+	spring-boot-stater-web
+	mysql相关 mysql驱动  druid数据源
+	mybatis相关的 (mybatis-spring-boot-stater) 依赖 (mybatis mybatis-spring)
+
+2.书写配置
+	a.开启注解扫描 @SpringBootApplication  @ComponentScan  省略
+	b.创建数据源  
+		1.指定数据源类型
+        2.指定数据库驱动
+        3.指定url
+        4.指定username
+        5.指定password
+
+    c.创建SqlSessionFactory
+    	1.指定mapper配置文件位置
+    	2.指定实体所在包位置 起别名
+
+   	d.创建DAO
+   		1.指定DAO接口所在包
+
+   	e.创建事务管理器  开启注解式事务生效  省略
+
+3.测试
+	
+	1).建表
+	2).开发实体类
+	3).开发DAO接口
+	4).开发Mapper配置文件
+	5).开发Service接口
+	6).开发ServiceImpl实现类
+	7).测试ServiceImpl
+
+
+
+
+
+
+
+回顾: spring框架如何整合mybatis?
+
+1.引入依赖
+	spring 相关
+	mysql 相关 驱动 数据源
+	mybatis 相关  mybatis核心jar  mybatis和spring框架整合
+
+
+2.spring.xml
+	a.开启注解扫描
+
+	b.创建数据源对象
+		注入 指定使用那种数据源类型  注入dirverClassName  注入url 注入username password
+
+	c.创建sqlSessionFactory
+		注入 数据源  注入mapper配置文件位置  注入实体别名包
+
+	d.创建Dao对象
+		注入SqlSessionFactory 以及Dao接口所在包
+
+	e.创建事务管理器      DataSourceTranacationManager 
+		注入 数据源对象   
+
+	f.在业务层组件上加入事务注解 @Transacational
+		<tx:annotation-driven  transaction-manager="transactionManager"/>
+
+3.测试
+	
+	1).建表
+	2).开发实体类
+	3).开发DAO接口
+	4).开发Mapper配置文件
+	5).开发Service接口
+	6).开发ServiceImpl实现类
+	7).测试ServiceImpl
+==============================================================================
+spring中本地测试
+	1.启动工厂
+		ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+
+	2.从工厂中获取指定对象
+		UserDao userDao = context.getBean("userDao");
+
+	3.调用方法
+		userDao.xxx(参数);
+
+springboot框架中完成本地测试?
+	
+	springboot = spring + springmvc
+
+	1.引入结合junit和springboot 依赖
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-test</artifactId>
+		     <scope>test</scope>
+		</dependency>
+
+	2.启动springboot应用 才能spring工厂启动   注入测试对象
+		@SpringBootTest 
+			修饰范围: 用在类上
+			作用:    在这个类实例化过程中启动springboot应用  
+
+
+
+
+
+

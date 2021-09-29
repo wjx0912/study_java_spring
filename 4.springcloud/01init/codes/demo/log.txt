@@ -1,0 +1,23 @@
+
+
+1. Log4j log 4(for) java  & logBack 日志说明
+
+    注意: springboot框架中默认集成了logback日志
+
+
+2. 日志分类
+    根日志: 全局日志  rootLogger   info
+    子日志: 包日志    logger.com.baizhi.dao = debug
+
+3. 日志级别
+   OFF  ERROR  WARNING  INFO  DEBUG  ALL   级别越高输出信息越少
+
+4. 日志对象logger
+
+    a.在类中定义对象
+     //定义日志对象
+     private static Logger log = LoggerFactory.getLogger(UserController.class);
+
+    b.在方法中使用日志
+
+

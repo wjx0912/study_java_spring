@@ -1,0 +1,33 @@
+1.springcloud & springcloud alibaba
+
+springcloud 微服务工具集    微服务工具集
+springcloud alibaba       微服务一站式解决方案
+
+
+2.springcloud中组件 五大组件
+
+  a.服务注册中心 eureka  consul
+  b.服务间通信组件(ribbon) Openfeign
+  c.服务熔断  Hystrix、Hystrix DashBoard
+  d.服务网关  zuul1.x zuul2.x  Gateway
+  e.服务配置中心  config  + bus 自动配置刷新
+
+
+3.springcloud alibaba组件
+
+  a.服务注册中心 服务配置中心   nacos   ====>  替换 eureka consul  替换config+bus
+  b.服务熔断、流控            sentinel(sentinel、sentinel dashBoard)====>  替换原始 Hystrix(Hystrix Hystrix DashBoard)
+
+
+
+4.总结:五大组件
+
+
+  a.服务注册中心      nacos
+  b.服务间通信组件    1.RestTemplate+Ribbon  2.OpenFeign组件
+  c.服务熔断、流控    sentinel
+  d.服务网关         gateway
+  e.服务配置中心      nacos
+===============================================================
+
+

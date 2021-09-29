@@ -1,0 +1,43 @@
+
+
+spring框架中属性注入:
+	
+
+	SET注入 灵活   构造注入   自动注入
+	
+
+	引用类型类型属性注入:
+		@Autowired: spring框架 默认根据类型注入
+		@Resource:  javaEE 规范 默认根据名称注入  自动根据类型注入
+
+		成员变量上
+		成员变量 set方法上
+
+	八种基本类型+String类型 + 日期类型 value + 数组 + set list map标签集合类型属性注入:
+
+	@Value("xx")
+	private string name;
+	<bean>
+		<property name="name" value="xiaochen">
+		<property name="qqs">
+			<array>
+				<value>xxx</value>
+			</array>
+		</property>
+
+	</bean>	
+
+SpringBoot 升级
+
+	属性注入:
+		@Value注解
+		@Autowired注解
+		@Resource
+
+=========================================================================
+
+
+	
+
+
+	

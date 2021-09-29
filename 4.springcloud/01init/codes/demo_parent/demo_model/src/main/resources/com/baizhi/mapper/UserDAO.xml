@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.UserDAO">
+
+
+
+
+    <!--update-->
+    <update id="update" parameterType="User">
+        update t_user
+        set
+            name=#{name},
+            age=#{age},
+            salary=#{salary}
+        where id = #{id}
+    </update>
+
+    <!--findById-->
+    <select id="findById" parameterType="Integer" resultType="User">
+        select id,name,age,salary from t_user where id = #{id}
+    </select>
+
+    <!--save 采用数据库自动生成(useGeneratedKeys="true")并返回主键的值(keyProperty保存主键的属性名)-->
+    <insert id="save" parameterType="User" useGeneratedKeys="true" keyProperty="id" >
+        insert into t_user values(#{id},#{name},#{age},#{salary})
+    </insert>
+
+
+    <!--findAll-->
+    <select id="findAll" resultType="User">
+        select id,name,age,salary from t_user
+    </select>
+
+
+</mapper>

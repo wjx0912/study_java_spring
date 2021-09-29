@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.StudentDao">
+
+    <resultMap type="com.baizhi.entity.Student" id="StudentMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="age" column="age" jdbcType="INTEGER"/>
+        <result property="qq" column="qq" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="bir" column="bir" jdbcType="TIMESTAMP"/>
+        <result property="starts" column="starts" jdbcType="VARCHAR"/>
+        <result property="attr" column="attr" jdbcType="VARCHAR"/>
+        <result property="mark" column="mark" jdbcType="VARCHAR"/>
+        <result property="clazzId" column="clazzId" jdbcType="VARCHAR"/>
+        <result property="groupId" column="groupId" jdbcType="VARCHAR"/>
+        <result property="cityId" column="cityId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryAll" resultMap="StudentMap">
+        select id,
+               name,
+               age,
+               qq,
+               phone,
+               bir,
+               starts,
+               attr,
+               mark,
+               clazzId,
+               groupId,
+               cityId
+        from student
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into student(name, age, qq, phone, bir, starts, attr, mark, clazzId, groupId, cityId)
+        values (#{name}, #{age}, #{qq}, #{phone}, #{bir}, #{starts}, #{attr}, #{mark}, #{clazzId}, #{groupId},
+                #{cityId})
+    </insert>
+
+</mapper>
+

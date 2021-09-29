@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "722a4bce-44f1-4284-a09b-ba6fa0c2432d",
+		"name": "clazz-web",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "城市管理",
+			"item": [
+				{
+					"name": "城市列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "添加城市",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"超级大城市\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/city/cities",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"city",
+								"cities"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "标签管理",
+			"item": [
+				{
+					"name": "标签列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/tag/tags",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"tag",
+								"tags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "添加标签",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "删除标签",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/tag/tags/22",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"tag",
+								"tags",
+								"22"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "班级管理",
+			"item": [
+				{
+					"name": "班级列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/clazz/clazzs",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"clazz",
+								"clazzs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "添加班级",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/clazz/clazzs",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"clazz",
+								"clazzs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "删除班级",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/clazz/clazzs/14",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"clazz",
+								"clazzs",
+								"14"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "小组管理",
+			"item": [
+				{
+					"name": "小组列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/group/groups",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"group",
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "添加小组",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "学生管理",
+			"item": [
+				{
+					"name": "学生列表",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/student/students",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"student",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "添加学生",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"小二黑\",\r\n    \"qq\": \"344355\",\r\n    \"phone\": \"01010533789\",\r\n    \"bir\": \"2012-10-11\",\r\n    \"mark\": \"他是傻子\",\r\n    \"clazzId\":15,\r\n    \"cityId\":16,\r\n    \"groupId\":10,\r\n    \"tagIds\":[3,6,16]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Base_URL}}/student/students",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"student",
+								"students"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
