@@ -10,9 +10,9 @@ public class TestDruid {
 
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        druidDataSource.setUrl("jdbc:mysql://localhost:3306/2001");
+        druidDataSource.setUrl("jdbc:mysql://192.168.0.192:3306/2001");
         druidDataSource.setUsername("root");
-        druidDataSource.setPassword("root");
+        druidDataSource.setPassword("tmp123456");
 
         DruidPooledConnection connection = druidDataSource.getConnection();
         System.out.println(connection);
