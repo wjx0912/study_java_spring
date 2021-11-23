@@ -180,6 +180,17 @@ Spring + Spring MVC + MyBatis  目前仍有很多系统在用：
 
 # 五、spring boot
 
+
+
+**技术栈**
+
+| 前端   | html, css, javascript,<br>jQuery, bootstrap, ajax, axios, ECMAScript, AdminLTE,<br>Vue, Vue CLI, vue-cli-service, Vuex, Vite, Element UI, Ant Design Vue, React<br>Babel, Webpack |
+| ------ | ------------------------------------------------------------ |
+| 后端   | spring boot                                                  |
+| 中间件 | mybatis, log4j2, spring jpa, redis, spring cache, spring security, jwt, <br>swagger, mock MVC, quartz, lombok, <br>Spring Boot Actuator, spring boot admin |
+
+
+
 ##### 1.spring  boot基础
 
 [《Spring Boot 2.X 最全课程代码》](https://github.com/ityouknow/spring-boot-leaning) 作者：ityouknow
