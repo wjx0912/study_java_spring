@@ -283,6 +283,8 @@ jwt
 
 [springboot+springSecurity+jwt实现的基于token的权限管理的一个demo](https://github.com/echisan/springboot-jwt-demo)
 
+[实战！spring Boot security+JWT 前后端分离架构认证登录](https://github.com/chenjiabing666/JavaFamily)   教程：https://www.cnblogs.com/cbvlog/p/15624215.html
+
 
 
 ##### 7.综合实践
